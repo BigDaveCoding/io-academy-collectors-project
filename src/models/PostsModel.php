@@ -13,7 +13,7 @@ class PostsModel
 
     public function getAllPosts(): array
     {
-        $query = $this->db->prepare("SELECT * FROM `posts`");
+        $query = $this->db->prepare("SELECT * FROM `posts` ORDER BY `date_time` DESC");
         $query->setFetchMode(PDO::FETCH_CLASS, PostEntity::class);
         if ($query->execute()){
             return $query->fetchAll();
