@@ -7,7 +7,7 @@ class PostEntity
     private string $title;
     private string $content;
     private string $category_id;
-    private string $user_id;
+    private string $username;
     private string $date_time;
     private int $likes;
     private int $dislikes;
@@ -33,9 +33,9 @@ class PostEntity
         return $this->category_id;
     }
 
-    public function getUserId(): string
+    public function getUsername(): string
     {
-        return $this->user_id;
+        return $this->username;
     }
 
     public function getDateTime(): string
