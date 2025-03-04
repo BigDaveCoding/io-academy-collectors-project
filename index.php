@@ -1,18 +1,16 @@
 <?php
 declare(strict_types=1);
+session_start();
 require_once 'src/services/DatabaseConnectionService.php';
 require_once 'src/models/PostsModel.php';
 require_once 'src/services/DisplayPostsService.php';
+require_once 'src/services/NavBarService.php';
 
 $db = DatabaseConnectionService::connect();
 
 $postsModel = new PostsModel($db);
 
-echo "<pre>";
-//var_dump($postsModel);
-//var_dump($postsModel->getAllPosts());
-echo "</pre>";
-//echo DisplayPostsService::allPosts($postsModel->getAllPosts());
+$_SESSION['loggedIn'] = false;
 
 ?>
 
@@ -28,6 +26,7 @@ echo "</pre>";
 </head>
 <body>
         <?php
+            echo NavBarService::display($_SESSION['loggedIn']);
             echo DisplayPostsService::allPosts($postsModel->getAllPosts());
         ?>
 </body>
