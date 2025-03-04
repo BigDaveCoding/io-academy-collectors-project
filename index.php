@@ -27,10 +27,8 @@ echo "</pre>";
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <section>
         <?php
             echo DisplayPostsService::allPosts($postsModel->getAllPosts());
         ?>
-    </section>
 </body>
 </html>
