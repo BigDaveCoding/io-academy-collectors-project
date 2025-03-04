@@ -22,14 +22,16 @@ class UsersModel
         }
     }
 
-//    public function getLoginDetails(int $id) : UserEntity
-//    {
-//        $query = $this->db->prepare("SELECT * FROM `users` WHERE id = :id;");
-//        $query->setAttribute(PDO::FETCH_CLASS, UserEntity::class);
-//        if ($query->execute([':id' => $id])) {
-//            return $query->fetch();
-//        } else {
-//            throw new Exception("User not found");
-//        }
-//    }
+    public function loginValidation (string $username, string $password) : UserEntity|false
+    {
+        $query = $this->db->prepare("SELECT * FROM `users` WHERE BINARY `username` = :username AND BINARY `password` = :password;");
+        $query->setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
+        if ($query->execute(["username" => $username, "password" => $password])) {
+            return $query->fetch();
+        } else {
+            throw new Exception("User not found");
+        }
+
+    }
+
 }
