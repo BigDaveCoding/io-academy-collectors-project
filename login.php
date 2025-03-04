@@ -10,8 +10,21 @@ require_once 'src/services/LoginValidationService.php';
 $db = DatabaseConnectionService::connect();
 $usersModel = new UsersModel($db);
 
+// initialize bool as true so it doesn't display error message on page load
+// or error on page load
+$valid = true;
+
+
+
 if(isset($_POST['login'])){
-    $valid = LoginValidationService::validateLogin($db, $usersModel);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $loginBool = LoginValidationService::validateLogin($usersModel, $username, $password);
+    if ($loginBool) {
+        header('Location: index.php');
+    } else {
+        $valid = false;
+    }
 }
 
 ?>
