@@ -17,7 +17,7 @@ class PostsModel
                                             JOIN `users`
 	                                            ON `posts`.`user_id` = `users`.`id`
                                             ORDER BY `date_time` DESC;");
-        $query->setFetchMode(PDO::FETCH_CLASS, PostEntity::class);
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
         if ($query->execute()){
             return $query->fetchAll();
         } else {
