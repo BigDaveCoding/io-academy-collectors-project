@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once "src/entities/PostEntity.php";
 
 class PostsModel
 {
@@ -12,7 +13,13 @@ class PostsModel
 
     public function getAllPosts(): array
     {
-
+        $query = $this->db->prepare("SELECT * FROM `posts`");
+        $query->setFetchMode(PDO::FETCH_CLASS, PostEntity::class);
+        if ($query->execute()){
+            return $query->fetchAll();
+        } else {
+            throw new Exception("getAllPosts query error");
+        }
     }
 
 }
