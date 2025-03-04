@@ -13,7 +13,7 @@ class UsersModel
 
     public function searchByUsername(string $username) : UserEntity|false
     {
-        $query = $this->db->prepare("SELECT * FROM `users` WHERE `username` = :username;");
+        $query = $this->db->prepare("SELECT * FROM `users` WHERE BINARY `username` = :username;");
         $query->setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
         if ($query->execute(["username" => $username])) {
             return $query->fetch();
